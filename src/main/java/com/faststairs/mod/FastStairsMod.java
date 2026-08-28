@@ -14,6 +14,12 @@ public class FastStairsMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.info("Fast Stairs mod initialized! Climb stairs {}x faster.", STAIR_CLIMB_SPEED_MULTIPLIER);
+        LOGGER.info("=========================================");
+        LOGGER.info("Fast Stairs Mod está inicializando...");
+        LOGGER.info("ID do Mod: {}", MOD_ID);
+        LOGGER.info("Velocidade de escalada configurada para: {}x", STAIR_CLIMB_SPEED_MULTIPLIER);
+        LOGGER.info("Procurando por mixins de escada...");
+        LOGGER.info("Fast Stairs Mod foi carregado com sucesso!");
+        LOGGER.info("=========================================");
     }
 }

@@ -16,7 +16,7 @@ import com.faststairs.mod.FastStairsMod;
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
 
-    @Inject(method = "travel", at = @At("TAIL"))
+    @Inject(method = "travel", at = @At("HEAD"))
     private void modifyStairClimbSpeed(Vec3d movementInput, CallbackInfo ci) {
         LivingEntity entity = (LivingEntity) (Object) this;
 
@@ -35,12 +35,20 @@ public class LivingEntityMixin {
             // Check if the block below is a stair by checking block name
             String blockName = blockBelow.getBlock().getTranslationKey();
             if (blockName != null && blockName.contains("stairs")) {
+                FastStairsMod.LOGGER.info("[Fast Stairs] Jogador detectado em escada!");
+                FastStairsMod.LOGGER.info("[Fast Stairs] Bloco: {}", blockName);
+                FastStairsMod.LOGGER.info("[Fast Stairs] Velocidade Y atual: {}", player.getVelocity().y);
+                
                 // Check if player is moving upward on stairs
                 Vec3d velocity = player.getVelocity();
                 if (velocity.y > 0.0) {
                     // Multiply vertical velocity by configured multiplier for faster stair climbing
+                    double newVelocityY = velocity.y * FastStairsMod.STAIR_CLIMB_SPEED_MULTIPLIER;
+                    FastStairsMod.LOGGER.info("[Fast Stairs] Aplicando multiplicador: {}x", FastStairsMod.STAIR_CLIMB_SPEED_MULTIPLIER);
+                    FastStairsMod.LOGGER.info("[Fast Stairs] Nova velocidade Y: {}", newVelocityY);
+                    
                     player.setVelocity(velocity.x,
-                                      velocity.y * FastStairsMod.STAIR_CLIMB_SPEED_MULTIPLIER,
+                                      newVelocityY,
                                       velocity.z);
                 }
             }
