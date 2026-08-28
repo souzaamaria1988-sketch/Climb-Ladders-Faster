@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import com.faststairs.mod.FastStairsMod;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
@@ -33,9 +34,11 @@ public class LivingEntityMixin {
             if (blockBelow.getBlock() instanceof Stairs) {
                 // Check if player is moving upward on stairs
                 if (player.getVelocity().y > 0) {
-                    // Multiply vertical velocity by 4 for faster stair climbing
+                    // Multiply vertical velocity by configured multiplier for faster stair climbing
                     Vec3d currentVelocity = player.getVelocity();
-                    player.setVelocity(new Vec3d(currentVelocity.x, currentVelocity.y * 4.0, currentVelocity.z));
+                    player.setVelocity(new Vec3d(currentVelocity.x, 
+                                                  currentVelocity.y * FastStairsMod.STAIR_CLIMB_SPEED_MULTIPLIER, 
+                                                  currentVelocity.z));
                 }
             }
         }

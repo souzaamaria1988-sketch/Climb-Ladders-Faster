@@ -11,6 +11,7 @@
     "homepage": "https://github.com/fast-stairs"
   },
   "license": "MIT",
+  "icon": "assets/fast-stairs/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
