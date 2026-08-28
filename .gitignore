@@ -1,39 +1,38 @@
 ```
 # Gradle
 .gradle/
-build/
-!gradle.properties
-!gradle/
 !gradle/wrapper/
-!gradle/wrapper/gradle-wrapper.properties
 
-# Dependencies
-libs/
-lib/
+# Build results
+build/
+!buildSrc/
 
-# Logs
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+
+# Loom
+loom-cache/
+
+# Development
+.env
+.env.local
+*.tmp
 *.log
+hs_err_pid*.log
 
 # IDE
-.idea/
-*.iml
-*.ipr
-*.iws
 .vscode/
-
-# Temporary files
-*.tmp
-*.temp
-*~
-.swp
-.swo
+.idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Environment
-.env
-.env.local
-*.env.*
 ```
