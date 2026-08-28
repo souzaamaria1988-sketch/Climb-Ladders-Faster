@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.faststairs.mod.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "LivingEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

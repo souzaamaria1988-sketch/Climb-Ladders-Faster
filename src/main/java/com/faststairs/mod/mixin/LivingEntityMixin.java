@@ -1,0 +1,43 @@
+package com.faststairs.mod.mixin;
+
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.BlockState;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.block.Stairs;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+@Mixin(LivingEntity.class)
+public class LivingEntityMixin {
+
+    @Inject(method = "travel", at = @At("HEAD"))
+    private void modifyStairClimbSpeed(Vec3d movementInput, CallbackInfo ci) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+        
+        // Check if the entity is a player
+        if (entity instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) entity;
+            
+            // Get the block position below the player
+            BlockPos posBelow = new BlockPos(Math.floor(player.getX()), 
+                                              Math.floor(player.getY() - 0.5), 
+                                              Math.floor(player.getZ()));
+            
+            BlockState blockBelow = player.getWorld().getBlockState(posBelow);
+            
+            // Check if the block below is a stair
+            if (blockBelow.getBlock() instanceof Stairs) {
+                // Check if player is moving upward on stairs
+                if (player.getVelocity().y > 0) {
+                    // Multiply vertical velocity by 4 for faster stair climbing
+                    Vec3d currentVelocity = player.getVelocity();
+                    player.setVelocity(new Vec3d(currentVelocity.x, currentVelocity.y * 4.0, currentVelocity.z));
+                }
+            }
+        }
+    }
+}
