@@ -1,38 +1,52 @@
-```
-# Gradle
-.gradle/
-!gradle/wrapper/
-
-# Build results
-build/
-!buildSrc/
-
-# Java
+```gitignore
+# Compiled and build artifacts
+*.pyc
+__pycache__/
 *.class
-*.jar
-*.war
-*.ear
-*.nar
-*.zip
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.out
+dist/
+build/
+target/
 
-# Loom
-loom-cache/
-
-# Development
+# Dependencies
+node_modules/
+venv/
+.venv/
 .env
 .env.local
-*.tmp
-*.log
-hs_err_pid*.log
+.env.*
 
-# IDE
-.vscode/
-.idea/
+# Logs and temp files
+*.log
+*.tmp
 *.swp
 *.swo
 
-# OS
+# Editors
+.vscode/
+.idea/
+
+# System files
 .DS_Store
 Thumbs.db
 
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Gradle
+.gradle/
+
+# MyPy
+.mypy_cache/
+
+# Pytest
+.pytest_cache/
 ```
